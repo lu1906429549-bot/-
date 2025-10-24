@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 .image-recognition-card {
     display: flex;
     flex-direction: row;
@@ -11,6 +10,28 @@
     justify-content: space-between;
     gap: 30px;
 }
+.image-recognition-card {
+    background: white;
+    border-radius: 10px;
+    padding: 30px 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.image-recognition-card {
+    grid-column: 1 / span 2;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+
+
+.image-recognition-container {
+    width: 100%;
+}
+
+
 
 .image-description {
     order: 2;
@@ -22,34 +43,6 @@
     margin-right: 20px;
 }
 
-.result-image-container {
-    order: 1;
-    flex: 0 0 45%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.result-image {
-    width: 110%;
-    height: auto;
-    border-radius: 8px;
-    display: block;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.image-shadow {
-    position: absolute;
-    bottom: -8px;
-    left: 10%;
-    width: 80%;
-    height: 15px;
-    background: rgba(108, 117, 125, 0.2);
-    border-radius: 50%;
-    z-index: -1;
-    filter: blur(4px);
-}
 
 
 @media (max-width: 768px) {
@@ -78,21 +71,7 @@
     }
 }
 
-.image-recognition-container {
-    width: 100%;
-    margin-bottom: 40px;
-}
 
-.image-recognition-card {
-    background: white;
-    border-radius: 10px;
-    padding: 30px 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
 
 .result-image-container {
     position: relative;
@@ -125,19 +104,13 @@
 }
 
 
-.results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 30px;
-}
 
-/* over */
 
 
 body {
     font-family: 'Microsoft YaHei', Arial, sans-serif;
     background-image: url("back.jpg");
+    background-attachment: fixed;
     background-size: cover;
     min-height: 100vh;
     padding: 20px;
@@ -149,7 +122,8 @@ body {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow-y: auto;
 }
 
 .header {
@@ -185,29 +159,50 @@ body {
     background: #f8f9fa transparent="0%";
     border-radius: 15px;
     padding: 30px;
-    margin-bottom: 30px;
+    padding-bottom: 10px;
+    /* margin-bottom: 30px; */
     border: 2px dashed #4a7c59;
 }
 
 .upload-area {
-    border: 3px dashed #4a7c59;
-    border-radius: 10px;
-    padding: 40px;
+    border: 3px dashed #4a7c59;/*3像素宽的虚线边框*/
+    border-radius: 10px;/*边框圆角为10像素，使外观更柔和*/
+    padding-top: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 0px;
     text-align: center;
     background: white;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    margin-bottom: 20px;/*底部外边距20像素，与下方元素保持间距*/
+    transition: all 0.3s ease;/*添加过渡效果，所有属性变化都会在0.3秒内平滑过渡。ease使过渡效果更自然*/
+    cursor: pointer;/*鼠标悬停时显示手型光标，提示可点击*/
     position: relative;
-    z-index: 1;
-    pointer-events: auto;
+    z-index: 1;/*堆叠顺序*/
+    pointer-events: auto;/*确保元素可以响应鼠标事件*/
     min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: flex;/*使用弹性布局*/
+    flex-direction: column;/*垂直*/
+    justify-content: center;/*垂直方向居中对齐*/
+    align-items: center;/*水平方向居中对齐*/
 }
 
+
+.image-preview {
+    margin-bottom: 30px;
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.uploaded-image {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    /* margin-top: 15px; */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    /* display: block; */
+}
 
 
 
@@ -269,6 +264,7 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     margin: 20px auto;
+    
     display: block;
     box-shadow: 0 5px 15px rgba(74, 124, 89, 0.3);
 }
@@ -293,10 +289,10 @@ body {
 }
 
 .results-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 30px;
+    display: none;
+    grid-template-columns: 1fr;
+    gap: 0px;
+    /* margin-bottom: 30px; */
 }
 
 .result-card {
@@ -304,19 +300,37 @@ body {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
 }
 
-.image-recognition-card {
-    grid-column: 1 / span 2;
-    margin-bottom: 0;
-    padding-bottom: 20px;
+.result-card2 {
+    background: rgb(254, 255, 254);
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
 }
+
+.bag1{
+    display: none;
+    padding-top: 40px;
+
+}
+.bag2{
+    display: none;
+    padding-top: 40px;
+
+
+}
+
+
 
 .result-card h3 {
     color: #2d5a27;
     margin-bottom: 25px;
     margin-top: 17px;
     font-size: 1.3rem;
+    /* text-align: center; */
 }
 
 .result-card h4 {
@@ -330,20 +344,11 @@ body {
 .plan-content {
     line-height: 1.6;
     color: #333;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
-.simulated-image {
-    width: 100%;
-    height: 250px;
-    background: #e9ecef;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6c757d;
-    font-size: 1.1rem;
-    border: 2px solid #dee2e6;
-}
+
 
 .feedback-section {
     background: white transparent="70%";
@@ -402,6 +407,7 @@ body {
     display: none;
     text-align: center;
     padding: 40px;
+    padding-bottom: 0px;
 }
 
 .local-loading {
@@ -446,14 +452,7 @@ body {
     }
 }
 
-.uploaded-image {
-    max-width: 100%;
-    max-height: 200px;
-    border-radius: 8px;
-    margin-top: 15px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    display: block;
-}
+
 
 #imagePreview {
     margin-top: 20px;
@@ -541,3 +540,24 @@ body {
         grid-column: 1 / -1;
     }
 }
+/* 表格markdown */
+.cost-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    line-height: 1.5;
+  }
+  .cost-table th, .cost-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  .cost-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  .cost-table tr:hover { background-color: #f5f5f5; }
+  
